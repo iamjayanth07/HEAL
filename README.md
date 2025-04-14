@@ -1,4 +1,4 @@
-# 🩸 Blood Report Health Condition Predictor
+# 🩸 HEAL
 
 This project is a machine learning-powered web application that analyzes blood report values and predicts possible health conditions.
 
@@ -15,4 +15,4 @@ This project is a machine learning-powered web application that analyzes blood r
   - 📊 Trained model with real patterns (normal, high, low, borderline)
   - Front End:HTML ,CSS,BOOTSTRAP
 
-### 📁 Project Structure
+
