@@ -1,0 +1,123 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HEAL - Health Analysis Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+      body {
+          background-color: #f8f9fa;
+          font-family: 'Poppins', sans-serif;
+      }
+      .card-header {
+          background-color: #007BFF;
+          color: #fff;
+      }
+      .food-section {
+          margin-top: 30px;
+      }
+      .food-section h5 {
+          color: #343a40;
+      }
+      .food-item {
+          font-size: 1rem;
+          color: #495057;
+      }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+      <h2 class="text-center text-primary mb-4">Health Analysis Report</h2>
+      
+      {% if findings %}
+      <h4 class="mb-3">🔍 Health Issues Detected</h4>
+      <div class="row mb-4">
+          {% for issue in findings %}
+          <div class="col-md-6 mb-3">
+              <div class="card border-danger">
+                  <div class="card-header">Issue</div>
+                  <div class="card-body">
+                      <p class="card-text text-danger">{{ issue }}</p>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+      
+      {% if normal_flags %}
+      <h4 class="mb-3">✅ Normal Parameters</h4>
+      <div class="row mb-4">
+          {% for param in normal_flags %}
+          <div class="col-md-4 mb-3">
+              <div class="card border-success">
+                  <div class="card-header">Normal</div>
+                  <div class="card-body">
+                      <p class="card-text text-success">✔ {{ param }}</p>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+      
+      <div class="food-section">
+          <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#foodTips">
+              <i class="bi bi-exclamation-circle"></i> Show Food Recommendations
+          </button>
+          <div class="collapse" id="foodTips">
+              <div class="row">
+                  <div class="col-md-6 mb-3">
+                      <div class="card shadow-sm border-success">
+                          <div class="card-header bg-success text-white"><i class="bi bi-check-circle"></i> Foods to Eat</div>
+                          <div class="card-body">
+                              {% if eat %}
+                              <ul class="list-group list-group-flush">
+                                  {% for food in eat %}
+                                  <li class="list-group-item food-item">✅ {{ food }}</li>
+                                  {% endfor %}
+                              </ul>
+                              {% else %}
+                              <p class="text-muted">No specific foods recommended.</p>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                      <div class="card shadow-sm border-danger">
+                          <div class="card-header bg-danger text-white"><i class="bi bi-x-circle"></i> Foods to Avoid</div>
+                          <div class="card-body">
+                              {% if avoid %}
+                              <ul class="list-group list-group-flush">
+                                  {% for food in avoid %}
+                                  <li class="list-group-item food-item">❌ {{ food }}</li>
+                                  {% endfor %}
+                              </ul>
+                              {% else %}
+                              <p class="text-muted">No specific foods to avoid.</p>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <p class="text-muted mt-3 small">💡 These recommendations are based on nutritional science. For example, spinach is rich in iron (boosting hemoglobin), while tea reduces iron absorption. Consult your doctor for personalized advice.</p>
+          </div>
+      </div>
+      
+      <div class="mt-5 text-center">
+          <a href="/input" class="btn btn-outline-primary"><i class="bi bi-arrow-left-circle"></i> Back to Input</a>
+      </div>
+  </div>
+  
+  <footer class="mt-5">
+      <div class="container">
+          <p class="mb-0 text-center">&copy; 2024 HEAL. Your wellness, our mission.</p>
+      </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
