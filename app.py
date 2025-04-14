@@ -1,15 +1,16 @@
-# UPDATED: app.py
+# app.py
 
 from flask import Flask, render_template, request, session
 import joblib
 import numpy as np
 from food_recommender import generate_food_recommendation
 
-# Load trained model
+
+
 model = joblib.load("model/final_model.pkl")
 
 
-# Reverse mapping: label → readable message
+
 condition_to_finding = {
     "anemia": "LOW hemoglobin / RBC → Possible Anemia",
     "diabetes": "HIGH blood sugar → Risk of Diabetes",
@@ -64,18 +65,18 @@ def analyze():
         input_dict = dict(zip(fields, inputs))
         session["last_input"] = input_dict
 
-        # Predict conditions using ML model
+        
         prediction = list(model.predict([inputs])[0])
         labels = list(condition_to_finding.keys())
         predicted_conditions = [label for label, value in zip(labels, prediction) if value == 1]
         findings = [condition_to_finding.get(label, label) for label in predicted_conditions]
 
-        # Detect normal values
+        
         normal_flags = [field.replace('_', ' ').title()
                         for field, (low, high) in NORMAL_RANGES.items()
                         if low <= input_dict[field] <= high]
 
-        # ✅ Additional: Detect abnormal values missed by model
+        
         already_flagged = " ".join(findings).lower()
         for field, (low, high) in NORMAL_RANGES.items():
             val = input_dict[field]
@@ -84,7 +85,7 @@ def analyze():
             elif val > high and field.replace('_', ' ') not in already_flagged:
                 findings.append(f"HIGH {field.replace('_', ' ').title()} (above normal)")
 
-        # Food recommendations
+        
         eat, avoid = generate_food_recommendation(findings)
 
         return render_template("results.html",

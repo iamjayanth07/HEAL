@@ -11,7 +11,7 @@ def generate_food_recommendation(findings):
     avoid = []
 
     for finding in findings:
-        # For low hemoglobin / iron deficiency (anemia)
+        
         if ("LOW hemoglobin" in finding or "LOW iron" in finding or 
             "Borderline LOW hemoglobin" in finding):
             eat += [
@@ -25,7 +25,7 @@ def generate_food_recommendation(findings):
                 "Coffee (similarly hinders iron absorption)"
             ]
 
-        # For high blood sugar (diabetes)
+        
         if ("HIGH blood sugar" in finding or "Borderline HIGH blood sugar" in finding):
             eat += [
                 "Whole Grains (low glycemic index, slow digestion)",
@@ -38,7 +38,7 @@ def generate_food_recommendation(findings):
                 "White Bread (refined carbohydrates that raise blood sugar)"
             ]
 
-        # For high cholesterol
+       
         if ("HIGH cholesterol" in finding or "Borderline HIGH cholesterol" in finding):
             eat += [
                 "Oats (soluble fiber can reduce cholesterol absorption)",
@@ -52,7 +52,7 @@ def generate_food_recommendation(findings):
                 "Butter (contains animal fats that raise cholesterol)"
             ]
 
-        # For low vitamin D (deficiency)
+        
         if ("LOW vitamin D" in finding or "Borderline LOW vitamin D" in finding):
             eat += [
                 "Fatty Fish like Salmon (natural source of vitamin D3)",
@@ -60,16 +60,16 @@ def generate_food_recommendation(findings):
                 "Fortified Milk (enriched with vitamin D)",
                 "Mushrooms (especially when exposed to sunlight)"
             ]
-            # Typically, no specific foods to avoid here
+            
 
-        # For high vitamin D (toxicity)
+        
         if "HIGH vitamin D" in finding:
             avoid += [
                 "Excess vitamin D supplements (should only be taken if prescribed)",
                 "Overconsumption of fortified foods (if leading to high intake)"
             ]
 
-        # For high creatinine / kidney issues
+        
         if ("HIGH creatinine" in finding or "Borderline HIGH creatinine" in finding or
             "kidney" in finding):
             eat += [
@@ -82,15 +82,15 @@ def generate_food_recommendation(findings):
                 "Salt (excessive salt can increase blood pressure and strain kidneys)"
             ]
 
-        # For high iron (iron overload)
+        
         if "HIGH iron" in finding:
             avoid += [
                 "Red Meat (may contribute to iron overload)",
                 "Iron supplements (unless medically necessary)"
             ]
-            # Optionally, you could also suggest a balanced diet rather than specific foods to 'eat'
+            
 
-        # For high uric acid (may indicate gout risk)
+       
         if ("HIGH uric acid" in finding or "Borderline HIGH uric acid" in finding):
             eat += [
                 "Cherries (shown to help reduce uric acid levels)",
@@ -103,7 +103,7 @@ def generate_food_recommendation(findings):
                 "Seafood (moderate purine levels, best consumed in moderation)"
             ]
 
-        # For high WBC or low WBC (immune system issues)
+        
         if "HIGH WBC" in finding:
             avoid += [
                 "Sugary foods (can promote inflammation)"
@@ -115,7 +115,7 @@ def generate_food_recommendation(findings):
                 "Yogurt (contains beneficial probiotics)"
             ]
             
-        # For low platelets
+        
         if "LOW Platelets" in finding:
             eat += [
                 "Papaya (may help boost platelet count)",
@@ -125,12 +125,12 @@ def generate_food_recommendation(findings):
             avoid += [
                 "Alcohol (can lower platelet count)"
             ]
-        # For high platelets
+        
         if "HIGH Platelets" in finding:
             avoid += [
                 "Excessive iron supplements (may interfere with platelet function)",
                 "Smoking (linked to elevated platelet counts)"
             ]
 
-    # Return sorted unique values in each list for clarity
+    
     return sorted(set(eat)), sorted(set(avoid))
